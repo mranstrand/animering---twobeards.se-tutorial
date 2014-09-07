@@ -1,0 +1,72 @@
+<html>
+    <head>
+    </head>
+    <body>
+        <canvas style="border: 1px solid blue" width="1000" height="600" id="duk"></canvas>
+        
+        <script>
+            // Deklarera och tilldelar variabler för canvas.
+            var c = document.getElementById("duk");
+            var ctx = c.getContext("2d");
+            
+            // variabler för position
+            var manX = 100, manY = 100;
+            
+            // Måla en gubbe
+            function paintMan(x, y){
+                //Måla huvudet
+                ctx.beginPath();
+                ctx.arc(x, y, 20, 0, 2 * Math.PI);
+                ctx.lineWidth = 5;
+                ctx.strokeStyle = "rgb(255, 0, 0)";
+                ctx.fillStyle = "rgb(255, 150, 100)";
+                ctx.stroke();
+                ctx.fill();
+
+                //Måla kropp
+                ctx.fillStyle = "olive";
+                ctx.fillRect(x - 10, y + 18, 20, 80);
+                
+                // Måla arm
+                ctx.beginPath();
+                ctx.moveTo(x + 10, y + 18);
+                ctx.lineTo(x + 20, y + 48);
+                ctx.stroke();
+                
+                // Måla arm
+                ctx.beginPath();
+                ctx.moveTo(x - 10, y + 18);
+                ctx.lineTo(x - 20, y + 48);
+                ctx.stroke();
+                
+                // Måla ben
+                ctx.strokeStyle = "blue";
+                ctx.beginPath();
+                ctx.moveTo(x + 10, y + 98);
+                ctx.lineTo(x + 20, y + 138);
+                ctx.stroke();
+                
+                // Måla ben
+                ctx.beginPath();
+                ctx.moveTo(x - 10, y + 98);
+                ctx.lineTo(x - 20, y + 138);
+                ctx.stroke();
+            }
+            
+            function repaint(){
+                // Sudda canvas
+                ctx.clearRect(0, 0, 1000, 600);
+                
+                // Målar gubbe
+                paintMan(manX, manY); 
+                
+                // Flyttar gubbe
+                manX = manX + 2;
+                manY = manY + 1;
+            }
+            
+            // Kallar på repaint 50 ggr i sekunden.
+            window.setInterval(repaint, 20);
+        </script>
+    </body>
+</html>
