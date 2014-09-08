@@ -12,6 +12,9 @@
             // variabler för position
             var manX = 100, manY = 100;
             
+            // Variabler för hastighet
+            var manVX = 1, manVY = 2;
+            
             // Måla en gubbe
             function paintMan(x, y){
                 //Måla huvudet
@@ -61,8 +64,18 @@
                 paintMan(manX, manY); 
                 
                 // Flyttar gubbe
-                manX = manX + 2;
-                manY = manY + 1;
+                manX = manX + manVX;
+                manY = manY + manVY;
+                
+                // Studs mot nederkant
+                if(manY + 138 > 600){
+                    manVY = -2;
+                }
+                
+                // Studs mot överkant
+                if(manY - 20 < 0){
+                    manVY = 2;
+                }
             }
             
             // Kallar på repaint 50 ggr i sekunden.
